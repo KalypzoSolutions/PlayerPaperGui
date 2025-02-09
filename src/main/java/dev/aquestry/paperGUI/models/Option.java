@@ -29,18 +29,20 @@ public class Option implements Listener {
     private final Vector3f playerLocation;
     private final Vector3f targetLocation;
     private final Location base;
+    private final boolean interactable;
 
     private TextDisplay text;
     private Interaction collider;
     private ItemDisplay display;
     private JavaPlugin plugin = JavaPlugin.getPlugin(PaperGUI.class);
 
-    public Option(@NotNull String text, @NotNull Player player, @NotNull Player target, @NotNull Vector3f offset, @NotNull Material material, @NotNull String command) {
+    public Option(@NotNull String text, @NotNull Player player, @NotNull Player target, @NotNull Vector3f offset, @NotNull Material material, @NotNull String command, boolean interactable) {
         this.infoText = text;
         this.player = player;
         this.target = target;
         this.command = command;
         this.material = material;
+        this.interactable = interactable;
         playerLocation = new Vector3f((float) player.getX(), (float) player.getY(), (float) player.getZ());
         targetLocation = new Vector3f((float) target.getX(), (float) target.getY(), (float) target.getZ());
         Vector3f temp = calculateNextEastPos(playerLocation, targetLocation).add(offset);
@@ -130,8 +132,11 @@ public class Option implements Listener {
     }
 
     public void runCommand() {
-        if(command.equals("<none>")) return;
         player.performCommand(command.replace("<target>", target.getName()));
+    }
+
+    public boolean isInteractable() {
+        return interactable;
     }
 
     public void remove() {

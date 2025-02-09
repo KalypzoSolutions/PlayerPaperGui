@@ -1,16 +1,19 @@
 menus:
   default:
-    title: "Main Menu"
+    title: "Interact with <target>"
     options:
       - name: "<bold>Report"
         material: "RED_DYE"
         offset: [0, 0.5, 0]
         command: "report <target>"
+        interactable: true
       - name: "<bold>Challenge"
         material: "DIAMOND_SWORD"
         offset: [0, 1.25, 0]
         command: "challenge <target>"
+        interactable: true
       - name: "<bold>Add friend"
         material: "BLACK_DYE"
         offset: [0, 2, 0]
         command: "friend add <target>"
+        interactable: true

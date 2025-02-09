@@ -8,11 +8,13 @@ public class OptionTemplate {
     public Vector3f offset;
     public Material material;
     public String command;
+    public boolean interactable;
 
-    public OptionTemplate(String text, Material material, Vector3f offset, String command) {
+    public OptionTemplate(String text, Material material, Vector3f offset, String command, boolean interactable) {
       this.text = text;
       this.material = material;
       this.offset = offset;
       this.command = command;
+      this.interactable = interactable;
     }
 }

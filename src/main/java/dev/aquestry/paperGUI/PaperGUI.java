@@ -43,7 +43,8 @@ public final class PaperGUI extends JavaPlugin {
             float z = ((Number) posList.get(2)).floatValue();
             Vector3f position = new Vector3f(x, y, z);
             String command = (String) option.get("command");
-            menu.addPart(new OptionTemplate(name, material, position, command));
+            boolean interactable = (boolean) option.get("interactable");
+            menu.addPart(new OptionTemplate(name, material, position, command, interactable));
         }
         defaultMenu = menu;
     }
