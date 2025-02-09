@@ -2,7 +2,9 @@ package dev.aquestry.paperGUI.useModels;
 
 import dev.aquestry.paperGUI.models.Menu;
 import dev.aquestry.paperGUI.models.Option;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.joml.Vector3f;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +26,7 @@ public class MenuTemplate {
         for(OptionTemplate optionTemplate : optionTemplates) {
             options.add(new Option(optionTemplate.text, player, target, optionTemplate.offset, optionTemplate.material, optionTemplate.command));
         }
+        options.add(new Option(name.replace("<target>", target.getName()), player, target, new Vector3f(optionTemplates.getLast().offset).add(0, 0.5f, 0), Material.AIR, "<none>"));
         if(!options.isEmpty()) {
           return new Menu(name, player, target, options);
         }

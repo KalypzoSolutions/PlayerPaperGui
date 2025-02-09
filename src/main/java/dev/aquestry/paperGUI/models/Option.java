@@ -130,6 +130,7 @@ public class Option implements Listener {
     }
 
     public void runCommand() {
+        if(command.equals("<none>")) return;
         player.performCommand(command.replace("<target>", target.getName()));
     }
 

@@ -4,3 +4,9 @@ main: dev.aquestry.paperGUI.PaperGUI
 api-version: '1.21'
 authors: [ Aquestry ]
 website: https://aquestry.dev
+
+commands:
+  reload-ppgui:
+    description: Reloads the config.
+    permission: ppgui.command.reload
+    usage: /reload-ppgui

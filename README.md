@@ -48,10 +48,14 @@ menus:
 3. The menu disappears after interaction or when manually closed.
 
 ## Requirements
-- PaperMC 1.21+
+- PaperMC 1.21.4
 
-## Permissions
-Currently, no permission system is required. All players can use the menu by default.
+## Commands
+**/reload-ppgui**
+
+Description: Reloads the config.
+
+Permission: ppgui.command.reload
 
 ## Credits
 - **Author**: Aquestry

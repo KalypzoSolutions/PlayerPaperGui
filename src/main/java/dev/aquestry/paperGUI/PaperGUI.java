@@ -21,6 +21,7 @@ public final class PaperGUI extends JavaPlugin {
         new GUIManager(this);
         logger.info("Loading Menu...");
         loadMenu();
+        getCommand("reload-ppgui").setExecutor(new ReloadCommand(this));
     }
 
     public void loadMenu() {
