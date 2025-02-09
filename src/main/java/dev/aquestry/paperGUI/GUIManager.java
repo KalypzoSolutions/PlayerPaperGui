@@ -10,32 +10,17 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class GUIManager implements Listener {
 
-    public static Map<Player, Menu> menuMap = new HashMap<>();
+    public static Map<UUID, Menu> menuMap = new HashMap<>();
 
     public GUIManager(JavaPlugin plugin) {
-      Bukkit.getPluginManager().registerEvents(this, plugin);
-      Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-          menuMap.forEach((player, menu) -> menu.remove());
-          menuMap.clear();
-      }));
-    }
-
-    @EventHandler
-    private void onPlayerMove(PlayerMoveEvent event) {
-        for(Map.Entry<Player, Menu> entry : menuMap.entrySet()) {
-            Player player = entry.getKey();
-            Menu menu = entry.getValue();
-            if (player.getLocation().distance(menu.options.getFirst().getInteraction().getLocation()) > 5) {
-                menu.remove();
-            }
-        }
+        Bukkit.getPluginManager().registerEvents(this, plugin);
     }
 
     @EventHandler
@@ -72,11 +57,11 @@ public class GUIManager implements Listener {
 
     private static void openMenu(MenuTemplate menuTemplate, Player player, Player target) {
         if(!menuMap.containsKey(player)) {
-            menuMap.put(player, menuTemplate.init(player, target));
+            menuMap.put(player.getUniqueId(), menuTemplate.init(player, target));
         } else {
             menuMap.get(player).remove();
             menuMap.remove(player);
-            menuMap.put(player, menuTemplate.init(player, target));
+            menuMap.put(player.getUniqueId(), menuTemplate.init(player, target));
         }
     }
 }

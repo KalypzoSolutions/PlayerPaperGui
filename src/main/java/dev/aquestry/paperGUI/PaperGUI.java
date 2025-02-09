@@ -19,9 +19,17 @@ public final class PaperGUI extends JavaPlugin {
     @Override
     public void onEnable() {
         new GUIManager(this);
+        new MenuTicker(this);
         logger.info("Loading Menu...");
         loadMenu();
         getCommand("reload-ppgui").setExecutor(new ReloadCommand(this));
+    }
+
+
+    @Override
+    public void onDisable() {
+        GUIManager.menuMap.forEach((player, menu) -> menu.remove());
+        GUIManager.menuMap.clear();
     }
 
     public void loadMenu() {

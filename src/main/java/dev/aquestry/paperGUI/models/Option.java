@@ -4,7 +4,6 @@ import dev.aquestry.paperGUI.PaperGUI;
 import io.papermc.paper.entity.LookAnchor;
 import io.papermc.paper.math.Position;
 import net.kyori.adventure.text.minimessage.MiniMessage;
-import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -35,6 +34,7 @@ public class Option implements Listener {
     private Interaction collider;
     private ItemDisplay display;
     private JavaPlugin plugin = JavaPlugin.getPlugin(PaperGUI.class);
+    private boolean hovered;
 
     public Option(@NotNull String text, @NotNull Player player, @NotNull Player target, @NotNull Vector3f offset, @NotNull Material material, @NotNull String command, boolean interactable) {
         this.infoText = text;
@@ -47,7 +47,6 @@ public class Option implements Listener {
         targetLocation = new Vector3f((float) target.getX(), (float) target.getY(), (float) target.getZ());
         Vector3f temp = calculateNextEastPos(playerLocation, targetLocation).add(offset);
         base = new Location(player.getWorld(), temp.x, temp.y, temp.z);
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, this::updateScale, 0, 1);
         spawnDisplay();
         spawnCollider();
         spawnText();
@@ -93,15 +92,18 @@ public class Option implements Listener {
         player.showEntity(plugin, collider);
     }
 
-    private void updateScale() {
+    public void updateScale() {
         RayTraceResult rayTraceResult = player.rayTraceEntities(5);
         if (rayTraceResult != null) {
-            if (Objects.requireNonNull(rayTraceResult.getHitEntity()).equals(collider)) {
+            if (Objects.requireNonNull(rayTraceResult.getHitEntity()).equals(collider) && !hovered) {
                 display.setTransformation(new Transformation(new Vector3f(0, 0, 0), new Quaternionf(), new Vector3f(1f, 1f, 1f), new Quaternionf()));
+                hovered =true;
                 return;
             }
         }
-        display.setTransformation(new Transformation(new Vector3f(0, 0, 0), new Quaternionf(), new Vector3f(0.75f, 0.75f, 0.75f), new Quaternionf()));
+        if (hovered) {
+            display.setTransformation(new Transformation(new Vector3f(0, 0, 0), new Quaternionf(), new Vector3f(0.75f, 0.75f, 0.75f), new Quaternionf()));
+        }
     }
 
     public Vector3f getTowards(Vector3f source, Vector3f target, double distance) {
