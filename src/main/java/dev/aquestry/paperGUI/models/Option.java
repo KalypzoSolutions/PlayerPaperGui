@@ -94,7 +94,6 @@ public class Option implements Listener {
     }
 
     private void updateScale() {
-        if (!player.equals(player)) return;
         RayTraceResult rayTraceResult = player.rayTraceEntities(5);
         if (rayTraceResult != null) {
             if (Objects.requireNonNull(rayTraceResult.getHitEntity()).equals(collider)) {
