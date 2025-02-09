@@ -26,6 +26,7 @@ public final class PaperGUI extends JavaPlugin {
 
     public void loadMenu() {
         saveDefaultConfig();
+        reloadConfig();
         ConfigurationSection menuSection = getConfig().getConfigurationSection("menus.default");
         if (menuSection == null) return;
         String title = menuSection.getString("title", "Menu");
