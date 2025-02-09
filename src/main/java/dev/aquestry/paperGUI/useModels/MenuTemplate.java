@@ -26,7 +26,7 @@ public class MenuTemplate {
         for(OptionTemplate optionTemplate : optionTemplates) {
             options.add(new Option(optionTemplate.text, player, target, optionTemplate.offset, optionTemplate.material, optionTemplate.command, optionTemplate.interactable));
         }
-        options.add(new Option(name.replace("<target>", target.getName()), player, target, new Vector3f(optionTemplates.getLast().offset).add(0, 0.5f, 0), Material.AIR, "", false));
+        options.add(new Option(name, player, target, new Vector3f(optionTemplates.getLast().offset).add(0, 0.5f, 0), Material.AIR, "", false));
         if(!options.isEmpty()) {
           return new Menu(name, player, target, options);
         }

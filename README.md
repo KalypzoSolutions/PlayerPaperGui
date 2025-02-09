@@ -18,20 +18,23 @@ PaperGUI is a Paper plugin that provides an interactive in-game GUI system. It a
 ```yaml
 menus:
   default:
-    title: "Main Menu"
+    title: "<bold>Interact with <target>"
     options:
-      - name: "<bold>Report"
+      - name: "Say hello!"
         material: "RED_DYE"
         offset: [0, 0.5, 0]
-        command: "report <target>"
-      - name: "<bold>Challenge"
+        command: "msg <target> hello!"
+        interactable: true
+      - name: "Ban <target>"
         material: "DIAMOND_SWORD"
         offset: [0, 1.25, 0]
-        command: "challenge <target>"
-      - name: "<bold>Add friend"
+        command: "ban <target>"
+        interactable: true
+      - name: "Add friend"
         material: "BLACK_DYE"
         offset: [0, 2, 0]
         command: "friend add <target>"
+        interactable: true
 ```
 
 ### Explanation:
@@ -41,11 +44,12 @@ menus:
     - `material`: The item representing the option.
     - `offset`: The position relative to the target.
     - `command`: The command executed when clicked (`<target>` is replaced with the selected player).
+    - `interactable`: Makes the option interactable or not.
 
 ## How to Use
 1. Right-click on a player to open the menu.
-2. Click an option to execute its command.
-3. The menu disappears after interaction or when manually closed.
+2. Click an option to execute its command (Left and right click).
+3. The menu disappears after interaction or when you are more than five blocks away.
 
 ## Requirements
 - PaperMC 1.21.4

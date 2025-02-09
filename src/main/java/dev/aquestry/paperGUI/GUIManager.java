@@ -48,6 +48,7 @@ public class GUIManager implements Listener {
         }
         if(entity instanceof Interaction box) {
             menuMap.forEach((player, menu) -> menu.options.forEach(option -> {
+                if(option.isntInteractable()) return;
                 if(option.getInteraction().equals(box)) {
                    option.runCommand();
                    menu.remove();
@@ -61,7 +62,8 @@ public class GUIManager implements Listener {
         Entity entity = event.getAttacked();
         if(entity instanceof Interaction box) {
             menuMap.forEach((player, menu) -> menu.options.forEach(option -> {
-                if(option.getInteraction().equals(box) && option.isInteractable()) {
+                if(option.isntInteractable()) return;
+                if(option.getInteraction().equals(box)) {
                     option.runCommand();
                     menu.remove();
                 }

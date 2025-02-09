@@ -68,7 +68,7 @@ public class Option implements Listener {
         text.setBillboard(Display.Billboard.FIXED);
         text.lookAt(Position.fine(player.getX(), player.getY(), player.getZ()), LookAnchor.EYES);
         text.setRotation(display.getYaw(), 0);
-        text.text(MiniMessage.miniMessage().deserialize(infoText));
+        text.text(MiniMessage.miniMessage().deserialize(infoText.replace("<target>", target.getName())));
         text.setSeeThrough(false);
         text.setDisplayWidth(0.1f);
         text.setDisplayHeight(0.1f);
@@ -135,8 +135,8 @@ public class Option implements Listener {
         player.performCommand(command.replace("<target>", target.getName()));
     }
 
-    public boolean isInteractable() {
-        return interactable;
+    public boolean isntInteractable() {
+        return !interactable;
     }
 
     public void remove() {
