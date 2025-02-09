@@ -1,0 +1,6 @@
+name: PaperGUI
+version: '1.0'
+main: dev.aquestry.paperGUI.PaperGUI
+api-version: '1.21'
+authors: [ Aquestry ]
+website: https://aquestry.dev
