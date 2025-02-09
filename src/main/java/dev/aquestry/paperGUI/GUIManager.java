@@ -10,9 +10,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 public class GUIManager implements Listener {
@@ -25,18 +25,17 @@ public class GUIManager implements Listener {
           menuMap.forEach((player, menu) -> menu.remove());
           menuMap.clear();
       }));
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, () -> {
-            Iterator<Map.Entry<Player, Menu>> iterator = menuMap.entrySet().iterator();
-            while (iterator.hasNext()) {
-                Map.Entry<Player, Menu> entry = iterator.next();
-                Player player = entry.getKey();
-                Menu menu = entry.getValue();
-                if (player.getLocation().distance(menu.options.getFirst().getInteraction().getLocation()) > 5) {
-                    menu.remove();
-                    iterator.remove();
-                }
+    }
+
+    @EventHandler
+    private void onPlayerMove(PlayerMoveEvent event) {
+        for(Map.Entry<Player, Menu> entry : menuMap.entrySet()) {
+            Player player = entry.getKey();
+            Menu menu = entry.getValue();
+            if (player.getLocation().distance(menu.options.getFirst().getInteraction().getLocation()) > 5) {
+                menu.remove();
             }
-        }, 1, 1);
+        }
     }
 
     @EventHandler
